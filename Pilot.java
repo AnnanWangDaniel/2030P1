@@ -1,22 +1,49 @@
 package cs2030.simulator;
 
-import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.List;
 
-public class Pilot implements Comparator<Event> {
+public class Pilot {
 
-    public int compare(Event e1, Event e2)  {
-        if (e1.getTime() < e2.getTime()) {
-            return -1;
-        } else if (e1.getTime() > e2.getTime()) {
-            return 1;
-        } else if (e1.getCustomerID() < e2.getCustomerID()) {
-            return -1;
-        } else if (e1.getCustomerID() > e2.getCustomerID()) {
-            return 1;
-        } else {
-            System.out.println("Input Error!");
-            return 0;
+    Server [] servers;
+
+    PriorityQueue<Event> events;
+
+    Statistics statistics = new Statistics();
+
+    public Pilot(int numOfServers, int numOfCustomer, List<Double> arrivalTimes) {
+        this.events = new PriorityQueue<>(new EventComparator());
+        Customer customer = new Customer(1, arrivalTimes.get(0));
+        ArrivalEvent tempEvent = new ArrivalEvent(customer, arrivalTimes.get(0));
+        events.add(tempEvent);
+        for (int i = 1; i < numOfCustomer; i++) {
+            //double x = gen.genInterArrivalTime();
+            //time += x;
+            customer = new Customer(i, arrivalTimes.get(i));
+            tempEvent = new ArrivalEvent(customer, arrivalTimes.get(i));
+            events.add(tempEvent);
         }
+        this.servers = new Server [numOfServers];
+        for (int i = 0;i < numOfServers;i++) {
+            this.servers[i] = new Server(i+1);
+        }
+    }
 
+    public void doService() {
+        while (events.size() > 0) {
+            Event firstEvent = getFirstEvent();
+            System.out.println(firstEvent);
+            Event newEvent = firstEvent.getNextEvent(servers);
+            if (newEvent != null) {
+                newEvent.updateStatistics(statistics);
+                events.add(newEvent);
+            }
+
+        }
+        System.out.println(statistics);
+    }
+
+    public Event getFirstEvent() {
+        return events.poll();
     }
 }

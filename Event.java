@@ -1,22 +1,22 @@
-package simulator;
-
-import java.util.List;
+package cs2030.simulator;
 
 public abstract class Event {
-    private final double time;
+    
     private final Customer customer;
-    private final List<Server> servers;
 
-    public Event(double time, Customer customer, List<Server> servers){
-        this.time = time;
+    private final double time;
+
+    public Event(Customer customer, double time) {
         this.customer = customer;
-        this.servers = servers;
+        this.time = time;
     }
 
-    public abstract Event execute();
+    public abstract Event getNextEvent(Server [] servers);
+
+    public abstract void updateStatistics(Statistics statistics);
 
     public Customer getCustomer() {
-        return customer;
+        return this.customer;
     }
 
     public int getCustomerID() {
@@ -24,14 +24,6 @@ public abstract class Event {
     }
 
     public double getTime() {
-        return time;
+        return this.time;
     }
-
-    public List<Server> getServers() {
-        return servers;
-    }
-
-    public abstract Event getNextEvent(Server [] servers,RandomGenerator gen);
-
-    public abstract void updateStatistics(Statistics statistics);
 }

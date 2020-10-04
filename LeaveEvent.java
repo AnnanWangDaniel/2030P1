@@ -1,19 +1,22 @@
-import java.util.List;
+package cs2030.simulator;
 
-public class LeaveEvent extends Event{
+class LeaveEvent extends Event {
 
-    public LeaveEvent(Customer customer, List<Server> servers) {
-        super(customer.getArrivalTime(), customer, servers);
+    public LeaveEvent(Customer customer, double time) {
+        super(customer,time);
     }
 
-    @Override
-    public Event execute() {
+    public Event getNextEvent(Server [] servers) {
         return null;
     }
 
-    @Override
+    public void updateStatistics(Statistics statistics) {
+        statistics.increaseLeft();
+    }
+
     public String toString() {
-        return String.format("%.3f", super.getTime()) + " " + getCustomer().getCustomerID() + " leaves";
+        return String.format("%.3f",this.getTime()) +
+            ' ' + this.getCustomerID() + " leaves";
     }
 
 }

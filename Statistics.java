@@ -1,4 +1,4 @@
-package simulator;
+package cs2030.simulator;
 
 class Statistics {
     private double waitingTime = 0;

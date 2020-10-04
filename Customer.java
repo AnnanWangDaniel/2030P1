@@ -1,4 +1,5 @@
 package cs2030.simulator;
+//package simulator;
 
 public class Customer {
     private final int customerID;

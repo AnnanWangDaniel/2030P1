@@ -1,4 +1,5 @@
 package cs2030.simulator;
+//package simulator;
 
 import java.util.PriorityQueue;
 import java.util.List;
@@ -7,7 +8,7 @@ public class Pilot {
 
     Server [] servers;
 
-    PriorityQueue<Event> events;
+    private final PriorityQueue<Event> events;
 
     Statistics statistics = new Statistics();
 
@@ -17,15 +18,13 @@ public class Pilot {
         ArrivalEvent tempEvent = new ArrivalEvent(customer, arrivalTimes.get(0));
         events.add(tempEvent);
         for (int i = 1; i < numOfCustomer; i++) {
-            //double x = gen.genInterArrivalTime();
-            //time += x;
             customer = new Customer(i, arrivalTimes.get(i));
             tempEvent = new ArrivalEvent(customer, arrivalTimes.get(i));
             events.add(tempEvent);
         }
         this.servers = new Server [numOfServers];
         for (int i = 0;i < numOfServers;i++) {
-            this.servers[i] = new Server(i+1);
+            this.servers[i] = new Server(i+1, false, false, 0);
         }
     }
 

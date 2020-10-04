@@ -1,27 +1,26 @@
 package cs2030.simulator;
+//package simulator;
 
 class Server {
     private final int serverID;
-    //private Event served;
-    //private Event wait;
-
-    private final int identifier;
 	private final boolean isAvailable;
 	private final boolean hasWaitingCustomer;
-	private final double nextAvailableTime;
-
+    private final double nextAvailableTime;
+    
+    private Event served;
+    private Event wait;
+/*
     public Server(int serverID) {
         this.serverID = serverID;
     }
-
+*/
     public Server(int identifier, boolean isAvailable, boolean hasWaitingCustomer, double nextAvailableTime) {
-		this.identifier = identifier;
+		this.serverID = identifier;
 		this.isAvailable = isAvailable;
 		this.hasWaitingCustomer = hasWaitingCustomer;
 		this.nextAvailableTime = nextAvailableTime;
 	}
 
-/*
     public int getServerID() {
         return this.serverID;
     }
@@ -54,7 +53,7 @@ class Server {
 
     public double getDoneTime() {
         return this.served.getTime();
-    }*/
+    }
 
     private String getAvailiability() {
 		if (isAvailable == true)
@@ -70,6 +69,6 @@ class Server {
 	} 
 
     public String toString() {
-		return this.identifier + this.getAvailiability();
+		return this.serverID + this.getAvailiability();
 	}
 }

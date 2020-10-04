@@ -1,13 +1,14 @@
 //package simulator;
+package simulator;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-/*import cs2030.simulator.Event;
+import cs2030.simulator.Event;
 import cs2030.simulator.Customer;
 import cs2030.simulator.EventComparator;
 import cs2030.simulator.Pilot;
-import cs2030.simulator.ArrivalEvent;*/
+import cs2030.simulator.ArrivalEvent;
 
 public class Main {
 

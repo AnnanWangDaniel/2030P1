@@ -1,8 +1,9 @@
-//package cs2030.simulator;
+package cs2030.simulator;
+//package simulator;
 
 class WaitEvent extends Event {
 
-    private Server server;
+    private final Server server;
 
 
     public WaitEvent(Customer customer, double time, Server server) {

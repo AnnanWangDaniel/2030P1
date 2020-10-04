@@ -1,4 +1,5 @@
 package cs2030.simulator;
+//package simulator;
 
 class DoneEvent extends Event {
     private Server server;

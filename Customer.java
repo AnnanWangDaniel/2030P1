@@ -1,26 +1,24 @@
 package cs2030.simulator;
-//package simulator;
 
 public class Customer {
-    private final int customerID;
-    private final double time;
+	private final int customerID;
+	private final double arrivalTime;
 
-    public Customer(int customerID, double time) {
-        this.customerID = customerID;
-        this.time = time;
-    }
-
-    public int getCustomerID() {
-        return this.customerID;
-    }
-
-    public double getTime() {
-        return this.time;
-    }
-
-    @Override
-	public String toString() {
-		return customerID + " arrives at " +  time;
+	public Customer(int customerID, double arrivalTime) {
+		this.customerID = customerID;
+		this.arrivalTime = arrivalTime;
 	}
 
+	public int getCustomerID() {
+        return customerID;
+    }
+
+    public double getArrivalTime() {
+        return arrivalTime;
+    }
+
+	@Override
+	public String toString() {
+		return customerID + " arrives at " +  arrivalTime;
+	}
 }

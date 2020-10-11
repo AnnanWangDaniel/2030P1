@@ -1,27 +1,28 @@
 package cs2030.simulator;
-//package simulator;
 
-class DoneEvent extends Event {
-    private Server server;
+import java.util.List;
 
-    public DoneEvent(Customer customer, double time, Server server) {
-        super(customer,time);
-        this.server = server;
+public class DoneEvent extends Event{
+
+    private final Server newServer;
+    private final Server currentServer;
+    private final List<Server> servers;
+
+    public DoneEvent(Customer customer, List<Server> servers, Server server) {
+        super(server.getNextAvailableTime(), customer, servers);
+        this.newServer = new Server(server.getIdentifier(), server.hasWaitingCustomer(), false, server.getNextAvailableTime());
+        this.currentServer = server;
+        this.servers = servers;
     }
 
-    public Event getNextEvent(Server [] servers) {
-        this.server.flushDoneEvent();
+    @Override
+    public Event execute() {
+        this.servers.set(currentServer.getIdentifier() - 1, newServer);
         return null;
     }
 
-    public void updateStatistics(Statistics statistics) {
-        return;
-    }
-
+    @Override
     public String toString() {
-        return String.format("%.3f",this.getTime()) +
-            ' ' + this.getCustomerID() + " done serving by " +
-            server.getServerID();
+        return String.format("%.3f", super.getTime()) + " " + getCustomer().getCustomerID() + " done serving by " + newServer.getIdentifier();
     }
-
 }
